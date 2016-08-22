@@ -11,8 +11,8 @@ $navbarItemPadding: 35px;
 $animationTime: 0.2s;
 
 @mixin overlayBg($color, $image) {
-background: 
-  /* top, transparent red, faked with gradient */ 
+background:
+  /* top, transparent red, faked with gradient */
   linear-gradient($color, $color),
   /* bottom, image */
   url($image);
@@ -29,7 +29,7 @@ body {
 	transition: top $animationTime ease-in-out;
 	border: none;
 	font-family: 'Titillium Web', sans-serif;
-	
+
 	.navbar-brand {
 		color: $navbarText;
 		line-height: 16px;
@@ -37,16 +37,16 @@ body {
 	  height: $navbarHeight;
 		text-align: center;
 		transition: all $animationTime linear;
-			
+
 		hr {
 			margin: 4px 10px;
 			border-color: $borderColor;
 			transition: border-color $animationTime, margin $animationTime,
 									opacity $animationTime linear;
-		}			
+		}
 		&:hover, &:focus {
 			color: $navbarHoverBorder;
-					
+
 			hr {
 				border-color: $navbarHoverBorder;
 				margin: 4px;
@@ -59,7 +59,7 @@ body {
 			> a {
 				color: $navbarText;
 				transition: all $animationTime linear;
-				
+
 				&:hover, &:focus {
 					color: $navbarTextHover;
 					background-color: $navbarBgHover;
@@ -69,7 +69,7 @@ body {
 		.active {
 			a {
 				color: $navbarText;
-				
+
 				&:hover, &:focus {
 					color: $navbarTextHover;
 					background-color: $navbarBgHover;
@@ -79,20 +79,20 @@ body {
 		.open {
 			a {
 				color: $navbarText;
-				
+
 				.caret {
 					border-top-color: $navbarTextHover;
 					border-bottom-color: $navbarTextHover;
-				}	
-				
+				}
+
 				&:hover, &:focus {
 					color: $navbarTextHover;
 					background-color: $navbarBgHover;
-					
+
 					.caret {
 						border-top-color: $navbarTextHover;
 						border-bottom-color: $navbarTextHover;
-					}	
+					}
 				}
 			}
 		}
@@ -102,7 +102,7 @@ body {
 				.caret {
 					border-top-color: $navbarText;
 		    	border-bottom-color: $navbarText;
-				}				
+				}
 				&:hover, &:focus {
 					.caret {
 						border-top-color: $navbarTextHover;
@@ -146,8 +146,8 @@ body {
 									box-shadow $animationTime linear;
 			> li {
 				> a {
-					color: $navbarText;					
-					
+					color: $navbarText;
+
 					&:focus, &:hover {
 						color: $navbarTextHover;
 						background-image: none;
@@ -182,20 +182,20 @@ body {
 					box-shadow: none;
 				}
 			}
-		}		
+		}
 	}
-	
+
 }
 @media (max-width: 767px) {
 	.navbar-custom .navbar-nav .open .dropdown-menu > li > a {
   	color: $navbarText;
-	
+
 		&:hover, &:focus {
 			color: $navbarTextHover;
 		}
 	}
 }
- 
+
 .nav-up {
   top: -$navbarHeight;
 }
@@ -204,12 +204,19 @@ body {
 	min-height: 30vh;
 	padding: 30px 0;
 	display: flex;
-	align-items: center;	
+	align-items: center;
 	justify-content: flex-start;
 	margin: 0;
 	background-image: none;
-	background-color: #30a678;
-	
+	background-color: #04caca;
+  
+  &#kontakt {
+    min-height: inherit;
+    position: absolute;
+    top: $navbarHeight;
+    min-width: 100%;
+    background-color: rgba(0,0,0, 0.6)
+  }
 	h2 {
 		margin: 0;
 	}
@@ -235,13 +242,13 @@ body {
 
 .segment {
 	padding: 20px 0;
-	
+
 	h3 {
 		margin-bottom: 20px;
 	}
 }
 
-#dusan_pavlovic, 
+#dusan_pavlovic,
 #nasa_misija {
 	background-color: #e1ebea;
 }
@@ -262,6 +269,12 @@ body {
 	border-right: $borderColor 1px solid;
 }
 
+#mapa {
+  min-width: 100%;
+  min-height: 400px;
+  height: 35vh;
+}
+
 @media (max-width: 991px) {
 	/* border right goes left when small*/
 	.border-right {
@@ -274,7 +287,4 @@ body {
 	background-image: none;
 	border: none;
 	text-shadow: none;
-	 > i.fa {
-		 padding-right: 8px;
-	 }
 }

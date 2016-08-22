@@ -8,6 +8,6 @@ content:
         dir: asc
         custom:
             - _naslov
-            - _sazetak
+            - _o-nama
+            - _nasa-misija
 ---
-

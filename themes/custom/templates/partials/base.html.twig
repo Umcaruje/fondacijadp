@@ -11,7 +11,7 @@
         {% block stylesheets %}
             {% do assets.add('theme://css/font-awesome.min.css',99) %}
             {% do assets.add('theme://css-compiled/theme.css',98) %}
-            {% do assets.add('theme://css/style.css',97) %}
+            {% do assets.add('theme://css/style.min.css',97) %}
             <link href="https://fonts.googleapis.com/css?family=Open+Sans|Titillium+Web&subset=cyrillic,cyrillic-ext,latin-ext" rel="stylesheet">
         {% endblock %}
         {{ assets.css() }}
