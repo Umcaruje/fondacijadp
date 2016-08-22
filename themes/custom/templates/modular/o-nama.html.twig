@@ -1,0 +1,29 @@
+{% macro pageLinkName(text) %}{{ text|lower|replace({' ':'_'}) }}{% endmacro %}
+
+<div id="{{ _self.pageLinkName(page.menu) }}" class="segment">
+    <div class="container">
+        {% if page.header.invertposition %}
+          <div class="col-md-3 text-center visible-xs visible-sm">
+            <h3>{{ page.header.title }}</h3>
+          </div>
+          
+          <div class="col-md-9 border-right">
+            {{ content }}
+          </div>
+          <div class="col-md-3 text-center hidden-xs hidden-sm">
+            <h3 class="sticky">{{ page.header.title }}</h3>
+          </div>
+        {% else %}
+          <div class="col-md-3 text-center visible-xs visible-sm">
+            <h3>{{ page.header.title }}</h3>
+          </div>
+          
+          <div class="col-md-3 text-center hidden-xs hidden-sm">
+            <h3 class="sticky">{{ page.header.title }}</h3>
+          </div>
+          <div class="col-md-9 border-left">
+            {{ content }}
+          </div>
+        {% endif %}
+    </div>
+</div>

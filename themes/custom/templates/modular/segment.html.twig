@@ -1,0 +1,7 @@
+{% macro pageLinkName(text) %}{{ text|lower|replace({' ':'_'}) }}{% endmacro %}
+
+<div id="{{ _self.pageLinkName(page.menu) }}" class="segment">
+    <div class="container">
+        {{ content }}
+    </div>
+</div>

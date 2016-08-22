@@ -1,0 +1,11 @@
+email: uros.maravic@gmail.com
+fullname: 'Uros M'
+title: Admin
+state: enabled
+access:
+  admin:
+    login: true
+    super: true
+  site:
+    login: true
+hashed_password: $2y$10$GIitm7WS.a9XSqXj9bTyoeblp77EPzi48ismdX6xnO7Xq4vOpUCym

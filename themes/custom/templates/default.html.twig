@@ -1,0 +1,13 @@
+{% extends 'partials/base.html.twig' %}
+{% macro pageLinkName(text) %}{{ text|lower|replace({' ':'_'}) }}{% endmacro %}
+
+{% block content %}
+    <div id="{{ _self.pageLinkName(page.menu) }}" class="header">
+      <div class="container">
+        <h2> {{ page.title }}</h2>
+      </div>
+    </div>
+     <div class="container">
+	      {{ page.content }}
+    </div>
+{% endblock %}
