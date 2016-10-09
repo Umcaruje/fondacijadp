@@ -10,4 +10,6 @@ content:
             - _naslov
             - _o-nama
             - _nasa-misija
+            - _stipendije
+            - _kontakt
 ---

@@ -181,7 +181,6 @@ class SimplesearchPlugin extends Plugin
             }
         }
 
-
         if (!empty($extras)) {
             $this->collection->append($extras);
         }
