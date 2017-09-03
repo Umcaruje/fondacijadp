@@ -1,7 +1,7 @@
 ---
 title: Ciljevi
 visible: true
-invertposition: false
+invertposition: true
 ---
 
 * Primena sistema za površinsko grejanje i hlađenje.

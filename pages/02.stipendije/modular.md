@@ -1,7 +1,6 @@
 ---
 title: Stipendije
 visible: true
-dropdown: true
 content:
     items: '@self.modular'
     order:
@@ -10,6 +9,4 @@ content:
         custom:
             - _naslov
             - _stipendije
-            - _konkurs
-            - _rezultati
 ---

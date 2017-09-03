@@ -24,6 +24,11 @@ class Form extends Iterator implements \Serializable
     public $message_color;
 
     /**
+     * @var string
+     */
+    public $status = 'success';
+
+    /**
      * @var array
      */
     protected $header_data = [];
@@ -81,7 +86,9 @@ class Form extends Iterator implements \Serializable
         if ($form) {
             $this->items = $form;
         } else {
-            $this->items = $header->form; // for backwards compatibility
+            if (isset($header->form)) {
+                $this->items = $header->form; // for backwards compatibility
+            }
         }
 
         // Add form specific rules.
@@ -117,6 +124,7 @@ class Form extends Iterator implements \Serializable
             'items' => $this->items,
             'message' => $this->message,
             'message_color' => $this->message_color,
+            'status' => $this->status,
             'header_data' => $this->header_data,
             'rules' => $this->rules,
             'data' => $this->data->toArray(),
@@ -138,6 +146,7 @@ class Form extends Iterator implements \Serializable
         $this->items = $data['items'];
         $this->message = $data['message'];
         $this->message_color = $data['message_color'];
+        $this->status = $data['status'];
         $this->header_data = $data['header_data'];
         $this->rules = $data['rules'];
 
@@ -146,7 +155,8 @@ class Form extends Iterator implements \Serializable
         $rules = $this->rules;
 
         $blueprint  = function() use ($name, $items, $rules) {
-            return new Blueprint($name, ['form' => $items, 'rules' => $rules]);
+            $blueprint = new Blueprint($name, ['form' => $items, 'rules' => $rules]);
+            return $blueprint->load()->init();
         };
 
         $this->data = new Data($data['data'], $blueprint);
@@ -182,56 +192,56 @@ class Form extends Iterator implements \Serializable
         $name = $this->items['name'];
         $grav = Grav::instance();
 
-        // Fix naming for fields (presently only for toplevel fields)
-        foreach ($this->items['fields'] as $key => $field) {
-            // default to text if not set
-            if (!isset($field['type'])) {
-                $field['type'] = 'text';
-            }
-
-            $types = $grav['plugins']->formFieldTypes;
-
-            // manually merging the field types
-            if ($types !== null && key_exists($field['type'], $types)) {
-                $field += $types[$field['type']];
-            }
-
-            // BC for old style of array style field definitions
-            if (is_numeric($key) && isset($field['name'])) {
-                unset($this->items['fields'][$key]);
-                $key = $field['name'];
-            }
-
-            // Add name based on key if not already set
-            if (!isset($field['name'])) {
-                $field['name'] = $key;
-            }
-
-            // set any modifications back on the fields array
-            $this->items['fields'][$key] = $field;
-
+        // Fix naming for fields (supports nested fields now!)
+        if (isset($this->items['fields'])) {
+            $this->items['fields'] = $this->processFields($this->items['fields']);
         }
 
         $items = $this->items;
         $rules = $this->rules;
+
         $blueprint  = function() use ($name, $items, $rules) {
-            return new Blueprint($name, ['form' => $items, 'rules' => $rules]);
+            $blueprint = new Blueprint($name, ['form' => $items, 'rules' => $rules]);
+            return $blueprint->load()->init();
         };
-
-        if (method_exists($blueprint, 'load')) {
-            // init the form to process directives
-            $blueprint->load()->init();
-
-            // fields set to processed blueprint fields
-            $this->fields = $blueprint->fields();
-        }
 
         $this->data   = new Data($this->header_data, $blueprint);
         $this->values = new Data();
+        $this->fields = null;
+        $this->fields = $this->fields();
 
         // Fire event
         $grav->fireEvent('onFormInitialized', new Event(['form' => $this]));
 
+    }
+
+    protected function processFields($fields)
+    {
+        $types = Grav::instance()['plugins']->formFieldTypes;
+
+        $return = array();
+        foreach ($fields as $key => $value) {
+
+            // default to text if not set
+            if (!isset($value['type'])) {
+                $value['type'] = 'text';
+            }
+
+            // manually merging the field types
+            if ($types !== null && key_exists($value['type'], $types)) {
+                $value += $types[$value['type']];
+            }
+
+            // Fix numeric indexes
+            if (is_numeric($key) && isset($value['name'])) {
+                $key = $value['name'];
+            }
+            if (isset($value['fields']) && is_array($value['fields'])) {
+                $value['fields'] = $this->processFields($value['fields']);
+            }
+            $return[$key] = $value;
+        }
+        return $return;
     }
 
     public function fields() {
@@ -314,6 +324,16 @@ class Form extends Iterator implements \Serializable
     }
 
     /**
+     * Get all data
+     * 
+     * @return Data
+     */
+    public function getData()
+    {
+        return $this->data;
+    }
+
+    /**
      * Set value of given variable in the data array
      *
      * @param string $name
@@ -329,6 +349,11 @@ class Form extends Iterator implements \Serializable
         $this->data->set($name, $value);
 
         return true;
+    }
+
+    public function setAllData($array)
+    {
+        $this->data = new Data($array);
     }
 
     /**
@@ -374,7 +399,7 @@ class Form extends Iterator implements \Serializable
             // we need to move the file at this stage or else
             // it won't be available upon save later on
             // since php removes it from the upload location
-            $tmp_dir = Grav::instance()['locator']->findResource('tmp://', true, true);
+            $tmp_dir = $grav['locator']->findResource('tmp://', true, true);
             $tmp_file = $upload->file->tmp_name;
             $tmp = $tmp_dir . '/uploaded-files/' . basename($tmp_file);
 
@@ -595,45 +620,7 @@ class Form extends Iterator implements \Serializable
 
     public function getPagePathFromToken($path)
     {
-        $path_parts = pathinfo($path);
-
-        $basename = '';
-        if (isset($path_parts['extension'])) {
-            $basename = '/' . $path_parts['basename'];
-            $path = $path_parts['dirname'];
-        }
-
-        $regex = '/(@self|self@)|((?:@page|page@):(?:.*))|((?:@theme|theme@):(?:.*))/';
-        preg_match($regex, $path, $matches);
-
-        if ($matches) {
-            if ($matches[1]) {
-                // self@
-                $page = $this->page(true);
-            } elseif ($matches[2]) {
-                // page@
-                $parts = explode(':', $path);
-                $route = $parts[1];
-                $page = $this->grav['page']->find($route);
-            } elseif ($matches[3]) {
-                // theme@
-                $parts = explode(':', $path);
-                $route = $parts[1];
-                $theme = str_replace(ROOT_DIR, '', $this->grav['locator']->findResource("theme://"));
-
-                return $theme . $route . $basename;
-            }
-        } else {
-            return $path . $basename;
-        }
-
-        if (!$page) {
-            throw new \RuntimeException('Page route not found: ' . $path);
-        }
-
-        $path = str_replace($matches[0], rtrim($page->relativePagePath(), '/'), $path);
-
-        return $path . $basename;
+        return Utils::getPagePathFromToken($path, $this->page());
     }
 
     /**

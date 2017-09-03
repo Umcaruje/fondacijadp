@@ -1,3 +1,90 @@
+# v2.3.2
+## 06/22/2017
+
+1. [](#bugfix)
+    * Grav plugin cli error on password change [#120](https://github.com/getgrav/grav-plugin-login/issues/120)
+
+# v2.3.1
+## 05/16/2017
+
+1. [](#improved)
+    * Added routes to the Admin blueprints
+
+# v2.3.0
+## 04/19/2017
+
+1. [](#new)
+    * Added new built-in profile page support
+    * Added optional flood protection for password resets and login attempts [#91](https://github.com/getgrav/grav-plugin-login/issues/91)
+1. [](#improved)
+    * Use new system configuration entries for username and password format
+    * Use initialized form object in Twig templates rather than array from page.header
+    * Improved alert styling in login templates
+    * Added `appends` for number field
+    * Added missing `route` options in admin options (blueprints)
+1. [](#bugfix)
+    * Set cookie path to `/` if `base_url_relative` is empty [#102](https://github.com/getgrav/grav-plugin-login/issues/102)
+    * Fixed some redirect logic
+    
+# v2.2.1
+## 01/24/2017
+
+1. [](#bugfix)
+    * Fix login form/status templates displaying user as logged in even if he's not authenticated
+    * Use email validation instead of text validation in the forgot password form [https://github.com/gantry/gantry5/issues/1813](https://github.com/gantry/gantry5/issues/1813)
+
+# v2.2.0
+## 12/13/2016
+
+1. [](#new)
+    * RC released as stable
+
+# v2.2.0-rc.5
+## 12/07/2016
+
+1. [](#improved)
+    * Added support for hiding `Remember me` checkbox and and `Forgot` button (for Offline functionality)
+1. [](#bugfix)
+    * Fixed redirect issue in admin plugin
+
+# v2.2.0-rc.4
+## 12/04/2016
+
+1. [](#improved)
+    * Improved logic for redirect after login to not include login-related pages.
+
+# v2.2.0-rc.3
+## 11/26/2016
+
+1. [](#improved)
+    * Added some validity checks in the reset password form
+1. [](#bugfix)
+    * Correctly redirect to the last page visited after login, unless `redirect_after_login` is defined
+
+# v2.2.0-rc.2
+## 11/17/2016
+
+1. [](#new)
+    * Allow to set permissions using nested array syntax [#96](https://github.com/getgrav/grav-plugin-login/issues/96)
+1. [](#improved)
+    * Use the same feedback message when resetting the password if the email exists or not. Remove email in the message as we now recover via email, useless
+1. [](#bugfix)
+    * Fix registration form, fields were not visible [#97](https://github.com/getgrav/grav-plugin-login/issues/97)
+    * Do not initialize the user session if the user exists but has no `site.login` permission
+
+# v2.2.0-rc.1
+## 11/09/2016
+
+1. [](#new)
+    * Allow login via `username` or `email`
+    * Only allow password recovery via `email` address
+
+# v2.1.2
+## 10/01/2016
+
+1. [](#bugfix)
+    * Fixed an old reference to `LoginUtils` and replaced with new `EmailUtils`
+
 # v2.1.1
 ## 09/08/2016
 

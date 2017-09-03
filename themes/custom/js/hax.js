@@ -6,6 +6,13 @@
     });
   });
 }).call(this);
+// start tooltips
+(function () {
+  $(document).ready(function(){
+      $('[data-toggle="tooltip"]').tooltip(); 
+  });
+ }).call(this);
+// prevent clicks in map 
 (function () {
   $('.mapa').click( function () {
       $('.mapa iframe').css("pointer-events", "auto");

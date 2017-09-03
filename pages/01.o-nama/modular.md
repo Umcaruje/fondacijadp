@@ -11,7 +11,6 @@ content:
             - _naslov
             - _o-fondaciji
             - _dusan-pavlovic
-            - _osnivac
             - _nasa-misija
             - _ciljevi
 ---

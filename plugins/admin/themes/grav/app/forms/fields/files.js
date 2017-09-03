@@ -46,12 +46,14 @@ Dropzone.confirm = (question, accepted, rejected) => {
 };
 
 const DropzoneMediaConfig = {
-    createImageThumbnails: { thumbnailWidth: 150 },
+    createImageThumbnails: { },
+    thumbnailWidth: 200,
+    thumbnailHeight: 150,
     addRemoveLinks: false,
-    dictDefaultMessage: translations.PLUGIN_ADMIN.DROP_FILES_HERE_TO_UPLOAD,
+    dictDefaultMessage: translations.PLUGIN_ADMIN.DROP_FILES_HERE_TO_UPLOAD.replace(/&lt;/g, '<').replace(/&gt;/g, '>'),
     dictRemoveFileConfirmation: '[placeholder]',
     previewTemplate: `
-        <div class="dz-preview dz-file-preview">
+        <div class="dz-preview dz-file-preview dz-no-editor">
           <div class="dz-details">
             <div class="dz-filename"><span data-dz-name></span></div>
             <div class="dz-size" data-dz-size></div>
@@ -61,7 +63,9 @@ const DropzoneMediaConfig = {
           <div class="dz-success-mark"><span>✔</span></div>
           <div class="dz-error-mark"><span>✘</span></div>
           <div class="dz-error-message"><span data-dz-errormessage></span></div>
-          <a class="dz-remove file-thumbnail-remove" href="javascript:undefined;" data-dz-remove><i class="fa fa-fw fa-close"></i></a>
+          <a class="dz-remove" title="${translations.PLUGIN_ADMIN.DELETE}" href="javascript:undefined;" data-dz-remove>${translations.PLUGIN_ADMIN.DELETE}</a>
+          <a class="dz-metadata" title="${translations.PLUGIN_ADMIN.METADATA}" href="#" target="_blank" data-dz-metadata>${translations.PLUGIN_ADMIN.METADATA}</a>
+          <a class="dz-view" title="${translations.PLUGIN_ADMIN.VIEW}" href="#" target="_blank" data-dz-view>${translations.PLUGIN_ADMIN.VIEW}</a>
         </div>`.trim()
 };
 
@@ -84,6 +88,16 @@ export default class FilesField {
         this.dropzone.on('removedfile', this.onDropzoneRemovedFile.bind(this));
         this.dropzone.on('sending', this.onDropzoneSending.bind(this));
         this.dropzone.on('error', this.onDropzoneError.bind(this));
+
+        this.container.on('mouseenter', '[data-dz-view]', (e) => {
+            const value = JSON.parse(this.container.find('[name][type="hidden"]').val() || '{}');
+            const target = $(e.currentTarget);
+            const file = target.parent('.dz-preview').find('.dz-filename');
+            const filename = encodeURI(file.text());
+
+            const URL = Object.keys(value).filter((key) => value[key].name === filename).shift();
+            target.attr('href', `${config.base_url_simple}/${URL}`);
+        });
     }
 
     initDropzone() {
@@ -106,7 +120,10 @@ export default class FilesField {
 
             dropzone.files.push(mock);
             dropzone.options.addedfile.call(dropzone, mock);
-            if (mock.type.match(/^image\//)) dropzone.options.thumbnail.call(dropzone, mock, data.path);
+            if (mock.type.match(/^image\//)) {
+                dropzone.options.thumbnail.call(dropzone, mock, data.path);
+                dropzone.createThumbnailFromUrl(mock, data.path);
+            }
 
             file.remove();
         });
@@ -119,6 +136,7 @@ export default class FilesField {
     }
 
     onDropzoneSuccess(file, response, xhr) {
+        response = typeof response === 'string' ? JSON.parse(response) : response;
         if (this.options.reloadPage) {
             global.location.reload();
         }
@@ -164,6 +182,11 @@ export default class FilesField {
         }
     }
 
+    b64_to_utf8(str) {
+        str = str.replace(/\s/g, '');
+        return decodeURIComponent(escape(window.atob(str)));
+    }
+
     onDropzoneRemovedFile(file, ...extra) {
         if (!file.accepted || file.rejected) { return; }
         let url = file.removeUrl || this.urls.delete;
@@ -178,7 +201,7 @@ export default class FilesField {
         request(url, { method: 'post', body }, () => {
             if (!path) { return; }
 
-            path = global.atob(path[1]);
+            path = this.b64_to_utf8(path[1]);
             let input = this.container.find('[name][type="hidden"]');
             let data = JSON.parse(input.val() || '{}');
             delete data[path];
@@ -264,7 +287,7 @@ const addNode = (container) => {
         paramName: settings.paramName || 'file',
         dotNotation: settings.name || 'file',
         acceptedFiles: settings.accept ? settings.accept.join(',') : input.attr('accept') || container.data('media-types'),
-        maxFilesize: settings.filesize || 256,
+        maxFilesize: typeof settings.filesize !== 'undefined' ? settings.filesize : 256,
         maxFiles: settings.limit || null
     };
 
