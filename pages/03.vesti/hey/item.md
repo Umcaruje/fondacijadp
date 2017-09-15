@@ -2,6 +2,9 @@
 title: Hey
 header_image: '1'
 header_image_file: glitch-image.jpeg
+summary:
+    enabled: '1'
+    format: short
 content:
     items: '@self.children'
     limit: '5'
@@ -11,8 +14,9 @@ content:
     pagination: '1'
 ---
 
-![](glitch-image.jpeg)![](601medals.png)cvvbghgh
+cvvbghgh
 
 fzifgzi
-
+===
 fdsssssssssssssgsag
+![](glitch-image.jpeg)![](601medals.png)

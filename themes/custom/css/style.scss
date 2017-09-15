@@ -5,211 +5,231 @@ $navbarTextHover: #5e5e5e;
 $navbarHoverBorder: #256e6c;
 
 $borderColor: #bababa;
+$overlayColor: rgba(41, 65, 59, 0);
 
 $navbarHeight: 68px;
 $navbarItemPadding: 35px;
 $animationTime: 0.2s;
 
 @mixin overlayBg($color, $image) {
-background:
   /* top, transparent color, faked with gradient */
-  linear-gradient($color, $color),
+  background:linear-gradient($color, $color),
   /* bottom, image */
   url($image);
 }
 
 body {
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Rhodium Libre', serif;
   padding-top: $navbarHeight;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-weight: 500;
 }
 
 .navbar-custom {
-	background: $navbarBg;
-	top: 0;
-	transition: top $animationTime ease-in-out;
-	border: none;
-	font-family: 'Titillium Web', sans-serif;
+  background: $navbarBg;
+  top: 0;
+  transition: top $animationTime ease-in-out;
+  border: none;
+  /*font-family: 'Titillium Web', sans-serif;*/
   max-height: $navbarHeight;
 
-	.navbar-brand {
-		color: $navbarText;
-		line-height: 16px;
-		font-size: 16px;
-	  height: $navbarHeight;
-		text-align: center;
-		transition: all $animationTime linear;
+  .navbar-brand {
+    color: $navbarText;
+    line-height: 16px;
+    font-size: 16px;
+    height: $navbarHeight;
+    text-align: center;
+    transition: all $animationTime linear;
 
-		hr {
-			margin: 4px 10px;
-			border-color: $borderColor;
-			transition: border-color $animationTime, margin $animationTime,
-									opacity $animationTime linear;
-		}
-		&:hover, &:focus {
-			color: $navbarHoverBorder;
+    hr {
+      margin: 4px 10px;
+      border-color: $borderColor;
+      transition: border-color $animationTime, margin $animationTime, opacity $animationTime linear;
+    }
 
-			hr {
-				border-color: $navbarHoverBorder;
-				margin: 4px;
-				opacity: 0.5;
-			}
-		}
-	}
-	.navbar-nav {
-		> li {
-			> a {
-				color: $navbarText;
-				transition: all $animationTime linear;
+    &:focus,
+    &:hover {
+      color: $navbarHoverBorder;
+
+      hr {
+        border-color: $navbarHoverBorder;
+        margin: 4px;
+        opacity: 0.5;
+      }
+    }
+  }
+
+  .navbar-nav {
+    > li {
+      > a {
+        color: $navbarText;
+        transition: all $animationTime linear;
         text-shadow: none;
 
-				&:hover, &:focus {
-					color: $navbarTextHover;
-					background-color: $navbarBgHover;
-				}
+        &:focus,
+        &:hover {
+          color: $navbarTextHover;
+          background-color: $navbarBgHover;
+        }
       }
-      &#doniraj {
-        > a {
-          color: #e4e4e4;
-          background-color: rgba(37, 110, 108, 0.9);
+    }
 
-          &:hover, &:focus {
-            background-color: rgb(37, 110, 108);
+    .active {
+      a {
+        color: $navbarText;
+
+        &:focus,
+        &:hover {
+          color: $navbarTextHover;
+          background-color: $navbarBgHover;
+        }
+      }
+    }
+
+    .open {
+      a {
+        color: $navbarText;
+
+        .caret {
+          border-top-color: $navbarTextHover;
+          border-bottom-color: $navbarTextHover;
+        }
+
+        &:focus,
+        &:hover {
+          color: $navbarTextHover;
+          background-color: $navbarBgHover;
+
+          .caret {
+            border-top-color: $navbarTextHover;
+            border-bottom-color: $navbarTextHover;
           }
         }
       }
-		}
-		.active {
-			a {
-				color: $navbarText;
+    }
+    /* caret */
+    .dropdown {
+      > a {
+        .caret {
+          border-top-color: $navbarText;
+          border-bottom-color: $navbarText;
+        }
 
-				&:hover, &:focus {
-					color: $navbarTextHover;
-					background-color: $navbarBgHover;
-				}
-			}
-		}
-		.open {
-			a {
-				color: $navbarText;
+        &:focus,
+        &:hover {
+          .caret {
+            border-top-color: $navbarTextHover;
+            border-bottom-color: $navbarTextHover;
+          }
+        }
+      }
+    }
+  }
 
-				.caret {
-					border-top-color: $navbarTextHover;
-					border-bottom-color: $navbarTextHover;
-				}
+  .dropdown-menu {
+    border: none;
+    border-radius: 0;
+    >li {
+      > a {
+        padding: 3px 10px;
+      }
+    }
+  }
+  /* mobile version */
+  .navbar-toggle {
+    border: none;
+    margin: 15px 15px 15px 0;
 
-				&:hover, &:focus {
-					color: $navbarTextHover;
-					background-color: $navbarBgHover;
+    &:focus,
+    &:hover {
+      background-color: $navbarBgHover;
+    }
 
-					.caret {
-						border-top-color: $navbarTextHover;
-						border-bottom-color: $navbarTextHover;
-					}
-				}
-			}
-		}
-		/* caret */
-		.dropdown {
-			> a {
-				.caret {
-					border-top-color: $navbarText;
-		    	border-bottom-color: $navbarText;
-				}
-				&:hover, &:focus {
-					.caret {
-						border-top-color: $navbarTextHover;
-			    	border-bottom-color: $navbarTextHover;
-					}
-				}
-			}
-		}
-	}
-	.dropdown-menu {
-		border: none;
-		border-radius: 0;
-	}
-	/* mobile version */
-	.navbar-toggle {
-	  border:none;
-		margin: 15px 15px 15px 0px;
-		&:hover, &:focus {
-			background-color: $navbarBgHover;
-		}
-		.icon-bar {
-			background-color: $navbarText;
-		}
-	}
+    .icon-bar {
+      background-color: $navbarText;
+    }
+  }
 }
 @media (min-width: 768px) {
-	.navbar-custom {
-		.dropdown-menu {
-			left: 50%;
-  	 	right: auto;
-  		text-align: left;
-  		transform: translate(-50%, 0);
-			display: block;
-			font-size: 14px;
-			visibility: hidden;
-			box-shadow: none;
-			width: 100%;
-	 		min-width: inherit;
-			opacity: 0;
-			transition: visibility 0s, opacity $animationTime,
-									box-shadow $animationTime linear;
-			> li {
-				> a {
-					color: $navbarText;
+  .navbar-custom {
+    .dropdown-menu {
+      left: 50%;
+      right: auto;
+      text-align: left;
+      transform: translate(-50%, 0);
+      display: block;
+      font-size: 14px;
+      visibility: hidden;
+      box-shadow: none;
+      width: 100%;
+      min-width: inherit;
+      opacity: 0;
+      transition: visibility 0s, opacity $animationTime, box-shadow $animationTime linear;
 
-					&:focus, &:hover {
-						color: $navbarTextHover;
-						background-image: none;
-						background-color: $navbarBgHover;
-					}
-				}
-			}
-		 }
-		 .dropdown:hover .dropdown-menu {
- 		    visibility: visible;
- 		    margin-top: 0;
-				box-shadow: inset 0px -3px 0px 0px $navbarHoverBorder;
-				opacity: 1;
-				transition: all $animationTime linear;
- 		 }
-		 .navbar-nav {
-	 		> li {
-				> a {
-					padding-left: $navbarItemPadding;
-					padding-right: $navbarItemPadding;
-					text-align: center;
-					line-height: $navbarHeight - 30px;
-					font-size: 13px;
-			    height: $navbarHeight;
-				}
-	 			> a:hover, > a:focus {
-					box-shadow: inset 0px -3px 0px 0px $navbarHoverBorder;
-				}
-			}
-			.dropdown {
-				> a:hover, > a:focus {
-					box-shadow: none;
-				}
-			}
-		}
-	}
+      > li {
+        > a {
+          color: $navbarText;
 
+          &:focus,
+          &:hover {
+            color: $navbarTextHover;
+            background-image: none;
+            background-color: $navbarBgHover;
+          }
+        }
+      }
+    }
+
+    .dropdown:hover .dropdown-menu {
+      visibility: visible;
+      margin-top: 0;
+      box-shadow: inset 0 -3px 0 0 $navbarHoverBorder;
+      opacity: 1;
+      transition: all $animationTime linear;
+    }
+
+    .navbar-nav {
+      > li {
+        > a {
+          padding-left: $navbarItemPadding;
+          padding-right: $navbarItemPadding;
+          text-align: center;
+          line-height: $navbarHeight - 30px;
+          font-size: 13px;
+          height: $navbarHeight;
+        }
+
+         > a:hover,
+        > a:focus {
+          box-shadow: inset 0 -3px 0 0 $navbarHoverBorder;
+        }
+      }
+
+      .dropdown {
+         > a:hover,
+        > a:focus {
+          box-shadow: none;
+        }
+      }
+    }
+  }
 }
 @media (max-width: 767px) {
-	.navbar-custom .navbar-nav .open .dropdown-menu > li > a {
-  	color: $navbarText;
+  .navbar-custom .navbar-nav .open .dropdown-menu > li > a {
+    color: $navbarText;
 
-		&:hover, &:focus {
-			color: $navbarTextHover;
-		}
-	}
+    &:focus,
+    &:hover {
+      color: $navbarTextHover;
+    }
+  }
 }
 
 .nav-up {
@@ -217,48 +237,56 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .header {
-	min-height: 30vh;
-	padding: 30px 0;
-	display: flex;
-	align-items: center;
-	justify-content: flex-start;
+  min-height: 30vh;
+  padding: 30px 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
   text-align: center;
-	margin: 0;
-	background-image: none;
-	background-color: #ff9800;
+  margin: 0;
+  background-image: none;
+  background-color: #ff9800;
 
   &#kontakt {
-    min-height: inherit;
+    @include overlayBg( $overlayColor, '../img/kontakt.jpg');
     background-size: cover;
-  	background-position: center;
+    background-position: top;
   }
 
   &#stipendije {
-  	@include overlayBg( rgba(41, 65, 59, 0.6), '../img/stipendije.jpg');
-  	background-size: cover;
-  	background-position: bottom;
+    @include overlayBg( $overlayColor, '../img/stipendije.jpg');
+    background-size: cover;
+    background-position: top;
   }
 
   &#o_nama {
-    /*@include overlayBg( rgba(41, 65, 59, 0.6), '../img/oNama.jpg');
+    @include overlayBg( $overlayColor, '../img/o-nama.jpg');
     background-size: cover;
-  	background-position: bottom;*/
+    background-position: bottom;
   }
-	h2 {
-		margin: 0;
-	}
+
+  &#vesti {
+    @include overlayBg( $overlayColor, '../img/vesti.jpg');
+    background-size: cover;
+    background-position: top;
+  }
+
+  h2 {
+    margin: 0;
+    color: #fff;
+  }
 }
 
 .jumbo {
-	min-height: 50vh;
-	padding: 30px 0;
-	background-color: #48cf72;
-	@include overlayBg( rgba(41, 65, 59, 0.5), '../img/main.jpg');
-	background-size: cover;
-	background-position: top;
-	color: #fff;
-	display: flex;
-	align-items: center;
+  min-height: 50vh;
+  padding: 30px 0;
+  background-color: #48cf72;
+  @include overlayBg( $overlayColor, '../img/main.jpg');
+  background-size: cover;
+  background-position: top;
+  color: #fff;
+  display: flex;
+  align-items: center;
   text-align: center;
 }
 
@@ -272,10 +300,12 @@ p {
 
 #strelice {
   transition: all $animationTime ease-in-out;
+
   path {
     fill: #333;
     transition: all $animationTime ease-in-out;
   }
+
   &:hover {
     path {
       fill: $navbarHoverBorder;
@@ -283,51 +313,52 @@ p {
     transform: scaleX(1.1);
   }
 }
+
 .segment {
-	padding: 20px 0;
+  padding: 20px 0;
 
   &#home2 {
-    @include overlayBg( rgba(41, 65, 59, 0.7), '../img/nasaMisija.jpg');
+    @include overlayBg( $overlayColor, '../img/nasa-misija.jpg');
     background-size: cover;
-  	background-position: center;
+    background-position: center;
     color: #fff;
   }
 
   &#home4 {
-    @include overlayBg( rgba(41, 65, 59, 0.7), '../img/kontaktmain.jpg');
+    @include overlayBg( $overlayColor, '../img/zajednica-main.jpg');
     background-size: cover;
-  	background-position: center;
+    background-position: center;
     color: #fff;
   }
 
-	h3 {
-		margin-bottom: 20px;
-	}
+  h3 {
+    margin-bottom: 20px;
+  }
 }
 
 .o-nama {
   min-height: 100vh;
 }
 
-#dusan_pavlovic,
-#ciljevi {
-	background-color: #e1ebea;
+#ciljevi,
+#dusan_pavlovic {
+  background-color: #e1ebea;
 }
 
 .sticky {
-	/*padding-top: $navbarHeight;*/
+  /*padding-top: $navbarHeight;*/
 }
 
 .text-center {
-	text-align: center;
+  text-align: center;
 }
 
 .border-left {
-	border-left: $borderColor 1px solid;
+  border-left: $borderColor 1px solid;
 }
 
 .border-right {
-	border-right: $borderColor 1px solid;
+  border-right: $borderColor 1px solid;
 }
 
 .mapa iframe {
@@ -339,23 +370,23 @@ p {
   min-height: 300px;
   height: 25vh;
 }
-
 @media (max-width: 991px) {
-	/* border right goes left when small*/
-	.border-right {
-		border-left: $borderColor 1px solid;
-		border-right: none;
-	}
+  /* border right goes left when small*/
+  .border-right {
+    border-left: $borderColor 1px solid;
+    border-right: none;
+  }
 }
 
 .btn {
-	background-image: none;
-	border: none;
-	text-shadow: none;
+  background-image: none;
+  border: none;
+  text-shadow: none;
   border-radius: 0;
 
   &.btn-primary {
     background-color: rgba(37, 110, 108, 0.9);
+
     &:hover {
       background-color: rgb(37, 110, 108);
     }
@@ -363,6 +394,7 @@ p {
 
   &.btn-success {
     background-color: rgba(37, 150, 37, 0.9);
+
     &:hover {
       background-color: rgb(37, 150, 37);
     }
@@ -376,15 +408,16 @@ p {
 }
 
 .fa-rotate-315 {
-    transform: rotate(315deg);
+  transform: rotate(315deg);
 }
 
 .fa-rotate-330 {
-    transform: rotate(330deg);
+  transform: rotate(330deg);
 }
 
 .btn {
   transition: all $animationTime ease-in-out;
+
   &:hover {
     padding: 10px 20px;
   }
@@ -402,6 +435,7 @@ div.stack {
     transition: all $animationTime ease-in-out;
     transform: scale(0.8);
   }
+
   &:hover {
     i.fa-stack-2x {
       opacity: 1;

@@ -2,6 +2,9 @@ absolute_urls: false
 param_sep: ':'
 wrapped_site: false
 reverse_proxy_setup: false
+force_ssl: false
+username_regex: '^[a-z0-9_-]{3,16}$'
+pwd_regex: '(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}'
 languages:
   include_default_lang: true
   translations: true
@@ -27,11 +30,12 @@ pages:
     markdown: true
     twig: false
   twig_first: false
+  never_cache_twig: false
   events:
     page: true
     twig: true
   markdown:
-    extra: false
+    extra: true
     auto_line_breaks: false
     auto_url_links: false
     escape_markup: false
@@ -71,8 +75,11 @@ cache:
     method: file
   driver: auto
   prefix: g
+  clear_images_by_default: true
+  cli_compatibility: false
   lifetime: 604800
   gzip: false
+  allow_webserver_gzip: false
 twig:
   cache: true
   debug: true
@@ -96,7 +103,7 @@ assets:
   collections:
     jquery: 'system://assets/jquery/jquery-2.x.min.js'
 errors:
-  display: true
+  display: '1'
   log: true
 debugger:
   enabled: false
@@ -108,14 +115,20 @@ images:
   cache_all: false
   cache_perms: '0755'
   debug: false
+  auto_fix_orientation: false
 media:
   enable_media_timestamp: false
   upload_limit: 0
+  auto_metadata_exif: false
 session:
   enabled: true
   timeout: 1800
   name: grav-site
   secure: false
   httponly: true
+  split: true
 gpm:
   releases: stable
+  method: auto
+  verify_peer: true
+  official_gpm_only: true
