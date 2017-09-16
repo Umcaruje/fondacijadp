@@ -4,8 +4,7 @@ visible: true
 invertposition: false
 ---
 
-![O Fondaciji](o-fondaciji.jpg?resize=300,300) {.pull-right}
-<br>
+![O Fondaciji](o-fondaciji.jpg?resize=300,300) {.descriptive-img .right}
 Fondacija Dušan Pavlović nastala je iz želje za prenošenjem znanja i podsticanjem mladih talenata u oblasti ekologije, energetske efikasnosti, obnovljivih izvora energije
 
 U današnjem obrazovnom sistemu u kojem se učenje svodi na puko usvajanje informacija, mladima je potrebna pomoć u vidu praktičnih znanja koja će im omogućiti da se na pravi način posvete svojoj struci i budu zadovoljni merljivim rezultatima.

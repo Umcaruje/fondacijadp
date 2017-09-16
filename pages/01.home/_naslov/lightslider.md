@@ -19,6 +19,6 @@ lightslider:
 
 # Zajedno stvaramo energetski efikasnu Srbiju.
 ___
-# Tekst 2
+# .
 ___
-# Tekst 3
+# .

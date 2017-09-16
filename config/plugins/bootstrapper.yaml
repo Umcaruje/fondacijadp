@@ -1,6 +1,6 @@
 enabled: true
 always_load: false
-use_cdn: false
+use_cdn: true
 mode: production
 load_core_css: true
 load_theme_css: true

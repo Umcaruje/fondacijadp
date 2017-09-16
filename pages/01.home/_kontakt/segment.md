@@ -4,7 +4,7 @@ title: home4
 
 <h2 class="page-header text-center">Postani deo naše zajednice</h2>
 <div class="row">
-  <div class="col-xs-3 text-center stack">
+  <div class="col-sm-3 col-xs-6 text-center stack">
     <a href="#" >
       <span class="fa-stack fa-4x fa-inverse stack" data-toggle="tooltip" title="Twitter" data-placement="bottom">
         <i class="fa fa-circle-thin fa-stack-2x"></i>
@@ -12,7 +12,7 @@ title: home4
       </span>
     </a>
   </div>
-  <div class="col-xs-3 text-center stack">
+  <div class="col-sm-3 col-xs-6 text-center stack">
     <a href="#" >
       <span class="fa-stack fa-4x fa-inverse stack" data-toggle="tooltip" title="Facebook" data-placement="bottom">
         <i class="fa fa-circle-thin fa-stack-2x"></i>
@@ -20,7 +20,7 @@ title: home4
       </span>
     </a>
   </div>
-  <div class="col-xs-3 text-center stack">
+  <div class="col-sm-3 col-xs-6 text-center stack">
     <a href="#" >
       <span class="fa-stack fa-4x fa-inverse stack" data-toggle="tooltip" title="Google +" data-placement="bottom">
         <i class="fa fa-circle-thin fa-stack-2x"></i>
@@ -28,7 +28,7 @@ title: home4
       </span>
     </a>
   </div>
-  <div class="col-xs-3 text-center stack">
+  <div class="col-sm-3 col-xs-6 text-center stack">
     <a href="mailto:office@fondacijadp.rs">
       <span class="fa-stack fa-4x fa-inverse stack" data-toggle="tooltip" title="Email" data-placement="bottom">
         <i class="fa fa-circle-thin fa-stack-2x"></i>
