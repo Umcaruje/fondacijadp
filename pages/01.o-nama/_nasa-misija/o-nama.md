@@ -4,6 +4,8 @@ menu: nasa_misija
 visible: true
 invertposition: true
 ---
+
+![Naša Misija](nasa%20missija.jpg?resize=300,260) {.responsive-img .right}
 Fondacija Dušan Pavlović okuplja oko sebe studente i učenike zainteresovane za energetsku efikasnost, obnovljive izvore energije, ekologije I održiv razvoj.
 
 Naša misija je pružanje mogućnosti mladima Srbije da se stručno usmeravaju.
@@ -12,4 +14,4 @@ U okviru naših snaga težimo da na što temeljniji način doprinesemo obrazovan
 
 Fondacija Dušan Pavlović želi da kroz svoj rad podrži održivo obrazovanje i poslovanje u oblasti energetske efikasnosti.
 
-Integracijom obrazovanja i primenom znanja kroz fondaciju Dušan Pavlović u saradnji sa Srpskim Centrom za Energetsku Efikasnost i firmom Igumanov, pružamo mladima mogućnost da svoja znanja upotpune kroz iskustvo i rad na projektima.
+Integracijom obrazovanja i primenom znanja kroz fondaciju Dušan Pavlović u saradnji sa [**Srpskim Centrom za Energetsku Efikasnost**](http://scee.rs) i firmom [**Igumanov**](https://igumanov.co.rs), pružamo mladima mogućnost da svoja znanja upotpune kroz iskustvo i rad na projektima.

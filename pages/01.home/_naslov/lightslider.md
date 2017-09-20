@@ -4,8 +4,6 @@ routable: false
 visible: false
 lightslider:
     slider_type: text
-    type_text_vertical_padding: 150px;
-    type_text_horizontal_padding: 50px;
     type_text_brightness: 0
     mode: slide
     pager: 'true'
@@ -17,8 +15,8 @@ lightslider:
     speed: 1000
 ---
 
-# Zajedno stvaramo energetski efikasnu Srbiju.
+# Usmeri svoje ideje!
 ___
-# .
+# Oživi svoje projekte!
 ___
-# .
+# Ostvari svoje ciljeve!

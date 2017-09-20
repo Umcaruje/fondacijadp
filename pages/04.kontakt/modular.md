@@ -8,6 +8,5 @@ content:
         dir: asc
         custom:
             - _naslov
-            - _mapa
             - _gde-smo
 ---

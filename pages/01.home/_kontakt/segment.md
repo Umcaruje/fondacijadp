@@ -38,5 +38,5 @@ title: home4
   </div>
 </div>
 <p class="narrow text-center">Svaki doprinos je značajan. Možete pomoći radu fondacije širenjem vesti o našem delovanju, davanjem sugestija, podrškom i učešćem.<br><br>
-  <a type="button" class="btn btn-success btn-lg spacious" href="kontakt">Kontaktiraj nas <i class="fa fa-angle-double-right"></i></a>
+  <a type="button" class="btn btn-success btn-lg" href="kontakt">Kontaktiraj nas <i class="fa fa-angle-double-right"></i></a>
 </p>

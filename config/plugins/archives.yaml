@@ -1,4 +1,4 @@
-enabled: false
+enabled: true
 built_in_css: true
 date_display_format: 'F Y'
 show_count: true
@@ -8,7 +8,8 @@ order:
   dir: desc
 filter_combinator: and
 filters:
-  category: blog
+  category:
+    - vesti
 taxonomy_names:
   month: archives_month
   year: archives_year

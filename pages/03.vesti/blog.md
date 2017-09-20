@@ -2,11 +2,11 @@
 title: Vesti
 content:
     items: '@self.children'
-    limit: 5
     order:
         by: date
         dir: desc
-    pagination: '1'
+    pagination: true
+    limit: 5
 ---
 
 ## Vesti
